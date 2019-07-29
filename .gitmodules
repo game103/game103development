@@ -1,0 +1,3 @@
+[submodule "game103"]
+	path = game103
+	url = https://github.com/game103/game103.git
