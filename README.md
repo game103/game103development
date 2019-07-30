@@ -16,6 +16,11 @@ This will allow you to create a docker container based on debian strech to run G
 5. `cd ..`
 4. Run `docker build -t game103 .` to build the image
 5. Run `docker run -itd -p 80:80 -p 443:443 --name game103-instance game103 bash` to build the container
+6. Run `docker cp game103-instance:/var/www/game103 .` to make sure the host's game103 directory matches that of the docker container's.
+7. Now we will have to recreate the container, but this time with the host's game103 directory mounted.
+    a. Stop the current container by running `docker stop game103-instance`
+    b. Remove the container by running `docker rm game103-instance`
+    c. Create the container again with the following command `docker run -itd -p 80:80 -p 443:443 -v $(pwd)/game103:/var/www/game103 --name game103-instance game103 bash`
 6. Run `docker exec -d game103-instance /bin/sh -c "/var/www/game103/setup/restart.sh"` to make sure all the programs are started properly in the container
     a. If you would like to use the Instagram Poster submodule, run `docker exec -d game103-instance /bin/sh -c "cd /var/www/game103/scripts/instagram-poster; npm install"` to install the necessary npm modules
 7. Visit localhost in your web browser, and you should be all set!
@@ -27,6 +32,7 @@ This will allow you to create a docker container based on debian strech to run G
 3. There is no data by default. You can either update `/var/www/game103/modules/Constants.class.php` to point to the production database if you know the credentials, or you can use the admins to generate your own data.
 4. The submodules in the Game 103 repo are not automatically downloaded
 5. The npm modules for the Instagram Poster submodule are also not included
+6. If you connect to the production database, you won't have the webp images. To generate them, run `docker exec -d game103-instance /bin/sh -c "/var/www/game103/scripts/webp_maker.sh"`;
 
 # Useful Commands
 * `docker exec -it game103-instance bash` - gives you shell access to the docker container
