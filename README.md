@@ -33,6 +33,7 @@ This will allow you to create a docker container based on debian strech to run G
 4. The submodules in the Game 103 repo are not automatically downloaded
 5. The npm modules for the Instagram Poster submodule are also not included
 6. If you connect to the production database, you won't have the webp images. To generate them, run `docker exec -d game103-instance /bin/sh -c "/var/www/game103/scripts/webp_maker.sh"`;
+7. The ddclient package and the `/etc/ddclient.conf` configuration file (for cocoapup.dog, ns1.cocoapup.dog, and ns2.cocoapup.dog). Cocoapup.dog is the nameserver for Game 103, but it is configured to run on the same machine as Game 103. Cocoapup.dogs's IP is updated via dynamic DNS with ddclient. The configuration will depend on the dynamic dns service used for cocoapup.dog.
 
 # Useful Commands
 * `docker exec -it game103-instance bash` - gives you shell access to the docker container
