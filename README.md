@@ -30,6 +30,7 @@ This will allow you to create a docker container based on debian strech to run G
 1. This development environment uses a self-generated ssl certificate, but production uses Lets-Encrypt.
 2. `/var/www/game103/modules/Constants.class.php` has several values that don't have values. Feel free to fill them out if you would like.
 3. There is no data by default. You can either update `/var/www/game103/modules/Constants.class.php` to point to the production database if you know the credentials, or you can use the admins to generate your own data.
+    * Be careful not to leave your container running at night when connected to the production database, as you do not want the cron jobs to run twice.
 4. The submodules in the Game 103 repo are not automatically downloaded
 5. The npm modules for the Instagram Poster submodule are also not included
 6. If you connect to the production database, you won't have the webp images. To generate them, run `docker exec -d game103-instance /bin/sh -c "/var/www/game103/scripts/webp_maker.sh"`;
@@ -42,3 +43,6 @@ This will allow you to create a docker container based on debian strech to run G
 
 # Updating Game 103
 If you update one of the files on Game 103 distributed out in `setup/distribute.sh` (including editing the database schema), you should be sure to run `setup/update.sh`, which will add your changes to the setup folder. Then, commit your changes.
+
+# Additional Notes
+If you run this on Windows, make sure shell scripts in `game103/setup` have LF endings as opposed to Windows' default CLRF. When you clone with git, the line endings may be changed to CLRF, so you may need to manually change it with a text editor.
