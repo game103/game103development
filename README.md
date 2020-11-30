@@ -12,7 +12,7 @@ This will allow you to create a docker container based on debian strech to run G
 2. `cd` to this repository
 3. Run `git submodule update --init game103` (this will make sure you have all the files for Game 103)
     a. If you would like to initialize all of the submodules in Game 103, `cd game103` and then run `git submodule update --init --recursive`
-4. `cd game103` and run `git pull`
+4. `cd game103`, `git checkout master`, and run `git pull`
 5. `cd ..`
 4. Run `docker build -t game103 .` to build the image
 5. Run `docker run -itd -p 80:80 -p 443:443 --name game103-instance game103 bash` to build the container
